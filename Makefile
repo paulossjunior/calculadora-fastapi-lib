@@ -39,15 +39,39 @@ publish-lib: build-modern
 clean:
 	rm -rf build dist *.egg-info
 
+# Buildar os containers usando docker compose
+docker-build:
+	docker compose build
+
+# Subir a aplicação usando docker compose
+docker-up:
+	docker compose up
+
+# Subir a aplicação em modo detached (background)
+docker-up-detached:
+	docker compose up -d
+
+# Derrubar a aplicação
+docker-down:
+	docker compose down
+
+# Limpar imagens, volumes, containers órfãos
+docker-clean:
+	docker compose down --rmi all --volumes --remove-orphans
+
 # Mostrar ajuda
 help:
 	@echo "Comandos disponíveis:"
-	@echo "  make install           - Instalar dependências gerais"
-	@echo "  make install-dev       - Instalar dependências para build/publicação/testes"
-	@echo "  make install-lib        - Instalar a lib calculator-lib do PyPI"
-	@echo "  make test-app          - Rodar testes da aplicação FastAPI"
-	@echo "  make test-lib          - Rodar testes unitários da lib"
-	@echo "  make build-lib         - Buildar lib usando setup.py (modo tradicional)"
-	@echo "  make build-modern      - Buildar lib usando python -m build (modo novo)"
-	@echo "  make publish-lib       - Buildar e publicar no PyPI"
-	@echo "  make clean             - Limpar arquivos de build"
+	@echo "  make install            - Instalar dependências gerais"
+	@echo "  make install-lib        - Instalar a lib calculator-lib"
+	@echo "  make install-dev        - Instalar ferramentas de build/teste"
+	@echo "  make test-lib           - Rodar testes da biblioteca"
+	@echo "  make test-app           - Rodar testes da API"
+	@echo "  make build-lib          - Buildar lib tradicional (setup.py)"
+	@echo "  make build-modern       - Buildar lib moderno (python -m build)"
+	@echo "  make publish-lib        - Publicar lib"
+	@echo "  make docker-build       - Buildar containers com docker compose"
+	@echo "  make docker-up          - Subir aplicação com docker compose"
+	@echo "  make docker-up-detached - Subir aplicação em background"
+	@echo "  make docker-down        - Derrubar aplicação"
+	@echo "  make docker-clean       - Limpar containers, imagens e volumes"
