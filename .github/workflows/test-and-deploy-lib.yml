@@ -35,7 +35,7 @@ jobs:
 
       - name: Run tests for library
         run: |
-          pytest tests_lib/
+          pytest test_lib/
 
   deploy-lib:
     name: 📦 Publish Calculator Lib to GitHub Packages
